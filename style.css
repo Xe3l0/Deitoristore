@@ -1,0 +1,139 @@
+body {
+  background-image: url('Black and White Simple Quote T-Shirt_20241018_022424_0000.png');
+  color: white;
+  font-family: 'EB Garamond', serif;
+  text-align: center;
+}
+
+.header {
+    margin-top: 20px;
+    color: #000000;
+    margin-bottom: 100px;
+}
+
+.header h1 {
+    font-size: 4em;
+}
+
+.buttons {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.buttons .btn {
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    flex: 1 1 120px; /* يسمح للأزرار بالتكيف مع المساحة المتاحة */
+    transition: transform 0.2s ease;
+}
+
+.buttons .btn:active {
+    transform: scale(1.0);
+}
+
+@media (max-width: 768px) {
+    .buttons {
+        justify-content: space-between;
+    }
+}
+
+.products {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    background-color: #FFFFFF;
+    color: black;
+    flex: 1 1 150px;
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.product-info h2 {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.product-info h3 {
+    font-size: 1.2em;
+    margin: 0;
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.purchase-btn {
+    text-decoration: none; /* إزالة الخط تحت النص */
+    background-color: #000000;
+    color: #F9FAFF;
+    padding: 9px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: auto;
+    transition: transform 0.7s ease;
+}
+
+.purchase-btn:active {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        flex: 1 1 45%;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card {
+        flex: 1 1 100%;
+    }
+}
+
+.separator {
+    border: none;
+    height: 2px;
+    background-color: black;
+    width: 70%;
+    margin: -10px auto -10px;
+}
+.responsive-image {
+    width: 99%;
+    margin: 20px auto;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* تأثير التحول */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* ظل الصورة */
+    border-radius: 15px; /* جعل الحواف مائلة */
+}
+
+.responsive-image:active {
+    transform: scale(1.1); /* تكبير الصورة بنسبة 10% عند الضغط */
+}
+.btn {
+    text-decoration: none; /* إزالة الخط السفلي */
+}

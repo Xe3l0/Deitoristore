@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <style>
+        body {
+            font-family: 'EB Garamond', serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .header {
+            text-align: center;
+        }
+        .add-product {
+            margin: 20px 0;
+        }
+        .add-product input,
+        .add-product button {
+            padding: 10px;
+            margin: 5px 0;
+            width: calc(100% - 22px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Add New Product</h1>
+        <hr>
+    </div>
+
+    <div class="add-product">
+        <h2>إضافة منتج جديد</h2>
+        <input type="text" id="productName" placeholder="اسم المنتج" required>
+        <input type="text" id="productPrice" placeholder="السعر" required>
+        <input type="file" id="productImage" accept="image/*" required>
+        <input type="text" id="purchaseLink" placeholder="رابط الشراء" required>
+        <button onclick="addProduct()">إضافة المنتج</button>
+    </div>
+
+    <script>
+        function addProduct() {
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+            const imageFile = document.getElementById('productImage').files[0];
+            const link = document.getElementById('purchaseLink').value;
+
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                products.push({
+                    name: name,
+                    price: price,
+                    image: e.target.result,
+                    link: link
+                });
+
+                localStorage.setItem('products', JSON.stringify(products));
+                alert('تم إضافة المنتج بنجاح');
+                // مسح الحقول بعد إضافة المنتج
+                document.getElementById('productName').value = '';
+                document.getElementById('productPrice').value = '';
+                document.getElementById('productImage').value = '';
+                document.getElementById('purchaseLink').value = '';
+            };
+            reader.readAsDataURL(imageFile);
+        }
+    </script>
+</body>
+</html>

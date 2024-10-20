@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detori Store</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .product-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .responsive-image {
+            width: 100%;
+            height: auto;
+        }
+        .btn {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+    <h1>Detori Store</h1>
+    <hr class="separator">
+    <p>Your choice for excellence</p>
+</div>
+
+<div class="buttons">
+    
+    <div class="btn">Home</div>
+    <a href="https://www.instagram.com/deitori.store/profilecard/?igsh=MWdnbDVmYmdwOHVhOQ==" class="btn">communication</a>
+</div>
+
+<!-- إضافة الصورة هنا -->
+<img src="/Screenshot_20241018-071206.jpg" alt="Your Image" class="responsive-image">
+
+<div class="products" id="productList"></div> <!-- مكان لعرض المنتجات -->
+
+<script>
+// تحميل المنتجات من التخزين المحلي وعرضها
+window.onload = function() {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    const productList = document.getElementById('productList');
+
+    products.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.classList.add('product-card');
+        productCard.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" style="width: 100%; height: auto;">
+            <div class="product-info">
+                <h2>${product.name}</h2>
+                <h3>$${product.price}</h3>
+            </div>
+            <button class="purchase-btn">Purchase</button>
+        `;
+        productList.appendChild(productCard);
+    });
+};
+</script>
+
+</body>
+</html>

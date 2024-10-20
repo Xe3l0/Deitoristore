@@ -1,0 +1,149 @@
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Detori Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .login-container {
+            max-width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .error-message {
+            color: red;
+            display: none; /* إخفاء رسالة الخطأ بشكل افتراضي */
+        }
+        .content {
+            display: none; /* إخفاء المحتوى حتى يتم تسجيل الدخول */
+            text-align: center;
+            margin-top: 50px;
+        }
+        .products {
+            margin-top: 20px;
+        }
+        .product-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px;
+            width: 300px;
+            text-align: center;
+            display: inline-block;
+        }
+        .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .publish-button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            width: 200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container" id="loginContainer">
+    <h2>تسجيل الدخول</h2>
+    <input type="password" id="password" placeholder="كلمة المرور" required>
+    <button onclick="login()">دخول</button>
+    <p class="error-message" id="errorMessage">كلمة المرور غير صحيحة!</p>
+</div>
+
+<div class="content" id="contentContainer">
+    <h1>مرحبًا بك في إدارة المنتجات!</h1>
+    <div class="products" id="productList"></div>
+    <button onclick="addSampleProducts()">إضافة منتجات تجريبية</button>
+    <button class="publish-button" onclick="window.location.href='Add_product.html'">لوحة نشر</button> <!-- زر لوحة نشر -->
+</div>
+
+<script>
+    function login() {
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('errorMessage');
+
+        // تحقق من كلمة المرور
+        if (password === "12121212") {
+            // إخفاء نموذج تسجيل الدخول وعرض المحتوى
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('contentContainer').style.display = 'block';
+            loadProducts(); // تحميل المنتجات بعد تسجيل الدخول
+        } else {
+            errorMessage.style.display = 'block'; // إظهار رسالة الخطأ
+        }
+    }
+
+    function loadProducts() {
+        const products = JSON.parse(localStorage.getItem('products')) || [];
+        const productList = document.getElementById('productList');
+        productList.innerHTML = ''; // مسح قائمة المنتجات الحالية
+
+        products.forEach((product, index) => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+                <h2>${product.name}</h2>
+                <p>سعر: $${product.price}</p>
+                <button class="delete-btn" onclick="deleteProduct(${index})">حذف</button>
+            `;
+            productList.appendChild(productCard);
+        });
+    }
+
+    function deleteProduct(index) {
+        const products = JSON.parse(localStorage.getItem('products')) || [];
+        products.splice(index, 1);
+        localStorage.setItem('products', JSON.stringify(products));
+        loadProducts(); // إعادة تحميل المنتجات بعد الحذف
+    }
+
+    function addSampleProducts() {
+        const products = [
+            { name: 'منتج 1', price: 10 },
+            { name: 'منتج 2', price: 20 },
+            { name: 'منتج 3', price: 30 }
+        ];
+        localStorage.setItem('products', JSON.stringify(products));
+        loadProducts(); // إعادة تحميل المنتجات بعد الإضافة
+    }
+</script>
+
+</body>
+</html>
